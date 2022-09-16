@@ -5,13 +5,12 @@ let firstCard = document.querySelectorAll('.one')
 let secondCard = document.querySelectorAll('.other')
 let usedId = []
 let usedOrder = []
-let chekingCards = []
+let flippedCards = []
 
 let imgs = document.getElementsByTagName("IMG")
 for (let img of imgs) {
     img.setAttribute("draggable", false)
 }
-
 
 async function apiImgs() {
     for (let i = 0; i < frontFace.length / 2; i++) {
@@ -26,6 +25,7 @@ async function apiImgs() {
         firstCard[i].src = pokemonImg
         secondCard[i].src = pokemonImg
     }
+    randomOrder()
 }
 
 function randomOrder() {
@@ -39,55 +39,35 @@ function randomOrder() {
     })
 }
 
-function cardFlipReset() {
-    cards.forEach(card => card.classList.remove('turn'))
-}
 
-function newGame() {
-    cardFlipReset()
-    usedId = []
-    usedOrder = []
-    chekingCards = []
-    apiImgs()
-    randomOrder()
-}
-
-
-newGameBtn.addEventListener('click', newGame)
-
-let available = []
-
-available.forEach(card => card.addEventListener('click', () => {
-    chekingCards.push(card)
+cards.forEach(card => card.addEventListener('click', () => {
+    card.classList.toggle('turn')
+    flippedCards.push(card)
+    if (flippedCards.length === 2) {
+        if (flippedCards[0].firstElementChild.src === flippedCards[1].firstElementChild.src) {
+            flippedCards[0].style.pointerEvents = 'none'
+            flippedCards[1].style.pointerEvents = 'none'
+            flippedCards.splice(0, 2)
+        }
+        else {
+            setTimeout(function () { flippedCards[0].classList.remove('turn') }, 400)
+            setTimeout(function () { flippedCards[1].classList.remove('turn') }, 400)
+            setTimeout(function () { flippedCards.splice(0, 2) }, 400)
+        }
+    }
 }))
 
 
+function newGame() {
+    console.log('new')
+    cards.forEach(card => card.classList.remove('turn'))
+    cards.forEach(card => card.style.pointerEvents = 'auto')
+    usedId = []
+    usedOrder = []
+    flippedCards = []
+    apiImgs()
 
-
-function toggleTurn(event) {
-    let card = event.target.parentNode
-    card.classList.toggle('turn')
-    check()
-    available.push(card)
 }
 
-for (let turnedcard of cards) {
-    turnedcard.addEventListener('click', toggleTurn)
-}
-
-function check() {
-    if (chekingCards.length === 2) {
-        chekingCards.forEach(checked => checked.removeEventListener('click', toggleTurn))
-        if (chekingCards[0].firstElementChild.src === chekingCards[1].firstElementChild.src) {
-            console.log('jej')
-            // chekingCards[0].classList.remove('available')
-            // chekingCards[1].classList.remove('available')
-            chekingCards = []
-        }
-        else {
-            chekingCards[0].classList.remove('turn')
-            chekingCards[1].classList.remove('turn')
-        }
-    }
-}
-
+newGameBtn.addEventListener('click', newGame)
+addEventListener('load', apiImgs)
