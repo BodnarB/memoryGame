@@ -1,4 +1,5 @@
 let cards = document.querySelectorAll('.card')
+let newGameBtn = document.querySelector('.start-btn')
 let frontFace = document.querySelectorAll('.front-face')
 let firstCard = document.querySelectorAll('.one')
 let secondCard = document.querySelectorAll('.other')
@@ -57,4 +58,16 @@ cards.forEach(card => card.addEventListener('click', () => {
 }))
 
 
+function newGame() {
+    console.log('new')
+    cards.forEach(card => card.classList.remove('turn'))
+    cards.forEach(card => card.style.pointerEvents = 'auto')
+    usedId = []
+    usedOrder = []
+    flippedCards = []
+    apiImgs()
+
+}
+
+newGameBtn.addEventListener('click', newGame)
 addEventListener('load', apiImgs)
