@@ -47,6 +47,8 @@ cards.forEach(card => card.addEventListener('click', () => {
         if (flippedCards[0].firstElementChild.src === flippedCards[1].firstElementChild.src) {
             flippedCards[0].style.pointerEvents = 'none'
             flippedCards[1].style.pointerEvents = 'none'
+            flippedCards[1].classList.toggle('turned')
+            flippedCards[0].classList.toggle('turned')
             flippedCards.splice(0, 2)
         }
         else {
@@ -55,13 +57,19 @@ cards.forEach(card => card.addEventListener('click', () => {
             setTimeout(function () { flippedCards.splice(0, 2) }, 400)
         }
     }
+    let foundCards = document.querySelectorAll('.turned')
+    if (foundCards.length === cards.length) {
+        console.log('nyertel',)
+        document.body.style.backgroundColor = 'green'
+    }
 }))
 
 
 function newGame() {
     console.log('new')
-    cards.forEach(card => card.classList.remove('turn'))
+    cards.forEach(card => card.classList.remove('turn', 'turned'))
     cards.forEach(card => card.style.pointerEvents = 'auto')
+    document.body.style.removeProperty('background-color')
     usedId = []
     usedOrder = []
     flippedCards = []
