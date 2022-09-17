@@ -82,5 +82,10 @@ button:hover {
 }
 
 .source {
-    text-align: center;
+    width: fit-content;
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(22, 22, 22);
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
 }
