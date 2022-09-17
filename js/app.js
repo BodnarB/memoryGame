@@ -6,8 +6,8 @@ let secondCard = document.querySelectorAll('.other')
 let usedId = []
 let usedOrder = []
 let flippedCards = []
-
 let imgs = document.getElementsByTagName("IMG")
+
 for (let img of imgs) {
     img.setAttribute("draggable", false)
 }
@@ -39,17 +39,17 @@ function randomOrder() {
     })
 }
 
-
 cards.forEach(card => card.addEventListener('click', () => {
     card.classList.toggle('turn')
     flippedCards.push(card)
     if (flippedCards.length === 2) {
         cards.forEach(flip => flip.style.pointerEvents = 'none')
         if (flippedCards[0].firstElementChild.src === flippedCards[1].firstElementChild.src) {
-            flippedCards[0].style.pointerEvents = 'none'
-            flippedCards[1].style.pointerEvents = 'none'
-            flippedCards[1].classList.toggle('turned')
-            flippedCards[0].classList.toggle('turned')
+            for (let flippedCard of flippedCards) {
+                flippedCard.style.pointerEvents = 'none'
+                flippedCard.classList.toggle('turned')
+                flippedCard.classList.remove('available')
+            }
             flippedCards.splice(0, 2)
         }
         else {
@@ -58,7 +58,8 @@ cards.forEach(card => card.addEventListener('click', () => {
             setTimeout(function () { flippedCards.splice(0, 2) }, 400)
         }
     }
-    setTimeout(function () { cards.forEach(flip => flip.style.pointerEvents = 'auto') }, 600)
+    let available = document.querySelectorAll('.available')
+    available.forEach(flip => flip.style.pointerEvents = 'auto')
     let foundCards = document.querySelectorAll('.turned')
     if (foundCards.length === cards.length) {
         document.body.style.backgroundColor = 'darkgreen'
@@ -68,7 +69,12 @@ cards.forEach(card => card.addEventListener('click', () => {
 
 function newGame() {
     cards.forEach(card => card.classList.remove('turn', 'turned'))
-    cards.forEach(card => card.style.pointerEvents = 'auto')
+    console.log(cards)
+    cards.forEach(card => {
+        card.classList.remove('available')
+        card.classList.toggle('available')
+        card.style.pointerEvents = 'auto'
+    })
     document.body.style.removeProperty('background-color')
     usedId = []
     usedOrder = []
