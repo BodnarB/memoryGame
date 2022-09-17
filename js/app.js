@@ -44,6 +44,7 @@ cards.forEach(card => card.addEventListener('click', () => {
     card.classList.toggle('turn')
     flippedCards.push(card)
     if (flippedCards.length === 2) {
+        cards.forEach(flip => flip.style.pointerEvents = 'none')
         if (flippedCards[0].firstElementChild.src === flippedCards[1].firstElementChild.src) {
             flippedCards[0].style.pointerEvents = 'none'
             flippedCards[1].style.pointerEvents = 'none'
@@ -57,16 +58,15 @@ cards.forEach(card => card.addEventListener('click', () => {
             setTimeout(function () { flippedCards.splice(0, 2) }, 400)
         }
     }
+    setTimeout(function () { cards.forEach(flip => flip.style.pointerEvents = 'auto') }, 600)
     let foundCards = document.querySelectorAll('.turned')
     if (foundCards.length === cards.length) {
-        console.log('nyertel',)
-        document.body.style.backgroundColor = 'green'
+        document.body.style.backgroundColor = 'darkgreen'
     }
 }))
 
 
 function newGame() {
-    console.log('new')
     cards.forEach(card => card.classList.remove('turn', 'turned'))
     cards.forEach(card => card.style.pointerEvents = 'auto')
     document.body.style.removeProperty('background-color')
