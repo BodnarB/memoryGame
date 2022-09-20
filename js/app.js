@@ -63,7 +63,7 @@ function flipCard(event) {
         flippedCards.splice(0, 2)
     }
     if (document.querySelectorAll('.found').length === document.querySelectorAll('.card').length) {
-        document.body.style.backgroundColor = 'darkgreen'
+        document.body.style.background = '#33472a'
     }
     cards = document.querySelectorAll('.available')
 }
@@ -76,7 +76,7 @@ function newGame() {
     })
     cards = document.querySelectorAll('.available')
     cards.forEach(card => card.addEventListener('click', flipCard))
-    document.body.style.removeProperty('background-color')
+    document.body.style.removeProperty('background')
     flippedCards = []
     apiImgs()
 }

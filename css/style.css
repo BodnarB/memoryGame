@@ -10,7 +10,11 @@ html {
 
 body {
     padding: 3rem;
+    background: radial-gradient(circle, rgba(136,136,136,1) 0%, rgb(34, 20, 37) 100%);
     background-color: rgb(44, 44, 44);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: whitesmoke;
     letter-spacing: 1px;
 }
