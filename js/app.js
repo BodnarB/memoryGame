@@ -1,4 +1,4 @@
-let cards = document.querySelectorAll('.card')
+let cards = document.querySelectorAll('.available')
 let newGameBtn = document.querySelector('.start-btn')
 let frontFace = document.querySelectorAll('.front-face')
 let firstCard = document.querySelectorAll('.one')
@@ -44,21 +44,19 @@ cards.forEach(card => card.addEventListener('click', flipCard))
 function flipCard(event) {
     let currentCard = event.target.parentNode
     flippedCards.push(currentCard)
-    currentCard.classList.toggle('turn')
-    currentCard.classList.toggle('turned')
+    currentCard.classList.add('turn', 'turned')
     if (flippedCards.length === 1) {
         document.querySelector('.turned').removeEventListener('click', flipCard)
     }
     if (flippedCards.length === 2) {
         cards.forEach(card => card.removeEventListener('click', flipCard))
         if (flippedCards[0].firstElementChild.src === flippedCards[1].firstElementChild.src) {
-            flippedCards[0].classList.toggle('found')
-            flippedCards[1].classList.toggle('found')
-            flippedCards[0].classList.remove('turned')
-            flippedCards[1].classList.remove('turned')
+            for (let flipped of flippedCards) {
+                flipped.classList.toggle('found')
+                flipped.classList.remove('turned', 'available')
+            }
             setTimeout(function () { cards.forEach(card => card.addEventListener('click', flipCard)) }, 450)
             document.querySelectorAll('.found').forEach(card => card.removeEventListener('click', flipCard))
-
         }
         else {
             setTimeout(function () { cards.forEach(card => card.addEventListener('click', flipCard)) }, 450)
@@ -66,19 +64,20 @@ function flipCard(event) {
         }
         flippedCards.splice(0, 2)
     }
-    if (document.querySelectorAll('.found').length === cards.length) {
+    if (document.querySelectorAll('.found').length === document.querySelectorAll('.card').length) {
         document.body.style.backgroundColor = 'darkgreen'
     }
+    cards = document.querySelectorAll('.available')
 }
 
 
 function newGame() {
-    cards.forEach(card => card.classList.remove('turn', 'turned', 'found'))
+    document.querySelectorAll('.card').forEach(card => card.classList.remove('turn', 'turned', 'found'))
     document.body.style.removeProperty('background-color')
     flippedCards = []
     apiImgs()
 }
 
 
-newGameBtn.addEventListener('click',newGame)
+newGameBtn.addEventListener('click', newGame)
 addEventListener('load', apiImgs)
