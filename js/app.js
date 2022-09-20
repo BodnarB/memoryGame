@@ -39,8 +39,6 @@ function randomOrder() {
     })
 }
 
-cards.forEach(card => card.addEventListener('click', flipCard))
-
 function flipCard(event) {
     let currentCard = event.target.parentNode
     flippedCards.push(currentCard)
@@ -81,6 +79,6 @@ function newGame() {
     apiImgs()
 }
 
-
+cards.forEach(card => card.addEventListener('click', flipCard))
 newGameBtn.addEventListener('click', newGame)
 addEventListener('load', apiImgs)
