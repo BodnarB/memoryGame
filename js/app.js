@@ -70,8 +70,10 @@ function flipCard(event) {
 
 
 function newGame() {
-    document.querySelectorAll('.card').forEach(card => card.classList.remove('turn', 'turned', 'found'))
-    document.querySelectorAll('.card').forEach(card => card.classList.add('available'))
+    document.querySelectorAll('.card').forEach(card => {
+        card.classList.remove('turn', 'turned', 'found')
+        card.classList.add('available')
+    })
     cards = document.querySelectorAll('.available')
     cards.forEach(card => card.addEventListener('click', flipCard))
     document.body.style.removeProperty('background-color')
