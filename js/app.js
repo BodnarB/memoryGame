@@ -63,7 +63,7 @@ function flipCard(event) {
         flippedCards.splice(0, 2)
     }
     if (document.querySelectorAll('.found').length === document.querySelectorAll('.card').length) {
-        document.body.style.background = '#33472a'
+        document.body.style.background = 'radial-gradient(circle, rgb(169 161 167) 0%, rgb(37 74 29) 100%)'
     }
     cards = document.querySelectorAll('.available')
 }
