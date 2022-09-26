@@ -68,16 +68,16 @@ button:hover {
 .game-table {
     display: flex;
     flex-wrap: wrap;
-    width: 700px;
-    gap: 20px;
+    width: 690px;
+    gap: 30px;
     margin: 3rem auto;
     perspective: 660px;
 }
 
 .card {
     position: relative;
-    width: 160px;
-    height: 160px;
+    width: 150px;
+    height: 150px;
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform 0.2s;

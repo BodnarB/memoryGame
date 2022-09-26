@@ -78,7 +78,8 @@ function newGame() {
     cards.forEach(card => card.addEventListener('click', flipCard))
     document.body.classList.remove('bg-color')
     flippedCards = []
-    apiImgs()
+    setTimeout(apiImgs, 300)
+    // apiImgs()
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard))
