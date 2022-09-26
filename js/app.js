@@ -75,11 +75,11 @@ function newGame() {
         card.classList.add('available')
     })
     cards = document.querySelectorAll('.available')
-    cards.forEach(card => card.addEventListener('click', flipCard))
+    cards.forEach(card => card.removeEventListener('click', flipCard))
     document.body.classList.remove('bg-color')
     flippedCards = []
+    setTimeout(function () { cards.forEach(card => card.addEventListener('click', flipCard)) }, 300)
     setTimeout(apiImgs, 300)
-    // apiImgs()
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard))
