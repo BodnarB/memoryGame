@@ -9,6 +9,7 @@ html {
 }
 
 body {
+    min-width: 280px;
     padding: 3rem;
     background: radial-gradient(circle, rgb(169 161 167) 0%, rgb(43 34 49) 100%);
     background-color: rgb(44, 44, 44);
