@@ -28,15 +28,15 @@ async function apiImgs() {
 }
 
 function randomOrder() {
-    let usedOrder = []
-    cards.forEach(card => {
-        let randomNum = Math.floor(Math.random() * frontFace.length)
-        while (usedOrder.includes(randomNum)) {
-            randomNum = Math.floor(Math.random() * frontFace.length)
-        }
-        usedOrder.push(randomNum)
-        card.style.order = randomNum
-    })
+    let cardNums = []
+    for (let n = 0; n < frontFace.length; n++) {
+        cardNums.push(n)
+    }
+    for (let card of cards) {
+        let randomNum = Math.floor(Math.random() * cardNums.length)
+        card.style.order = cardNums[randomNum]
+        cardNums.splice(randomNum, 1)
+    }
 }
 
 function flipCard(event) {
